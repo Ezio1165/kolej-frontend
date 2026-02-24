@@ -1,0 +1,72 @@
+1. Temel Mantık: Ayrıştır ve Yönet
+Bu projeyi yayınlarken iki ayrı parça olarak düşüneceğiz:
+
+Frontend (Next.js): Statik dosya sunucularında (Vercel, Netlify) barındırılır.
+
+Backend (Strapi): 7/24 çalışan bir Node.js sunucusunda (Render, Railway, DigitalOcean) barındırılır.
+
+Veritabanı (PostgreSQL): Strapi'nin verilerini tutması için internette açık bir veritabanı (Supabase, Neon veya Render içinde).
+
+2. Ücretsiz ve En Kolay Yol (Hobi Seviyesi İçin)
+Eğer sadece birilerine göstermek istiyorsan, cebinden 1 kuruş çıkmadan şu kombinasyonu kullanabilirsin:
+
+Frontend: Vercel (Next.js'in yaratıcısıdır, en iyi orası çalıştırır).
+
+Backend + Veritabanı: Render veya Railway.
+
+3. Detaylı Yayınlama Rehberi
+Şimdi adım adım süreci planlayalım:
+
+Adım 1: Kodları GitHub'a Yüklemek
+Tüm sürecin kalbi GitHub'dır. Kodlarını GitHub'a yüklediğinde, Vercel ve Render bu kodları oradan otomatik çeker ve her güncelleme yaptığında siteyi kendiliğinden yeniler (CI/CD).
+
+frontend klasörünü bir repoya, backend klasörünü ayrı bir repoya yüklemeni öneririm.
+
+Adım 2: Backend (Strapi) Kurulumu (Render.com)
+Render.com'da bir hesap aç.
+
+New + Web Service de ve GitHub'daki backend reponu bağla.
+
+Strapi için bir PostgreSQL veritabanı oluştur (Render içinde ücretsiz seçenek var).
+
+Environment Variables (Ortam Değişkenleri): Strapi'nin çalışması için gereken APP_KEYS, API_TOKEN_SALT gibi değerleri (lokaldeki .env dosyasından bakarak) Render paneline gir.
+
+Build Command: npm install && npm run build
+
+Start Command: npm run start
+
+Adım 3: Frontend (Next.js) Kurulumu (Vercel.com)
+Vercel.com'da hesap aç.
+
+Add New + Project de ve GitHub'daki frontend reponu seç.
+
+Environment Variables Kısmı (KRİTİK):
+
+NEXT_PUBLIC_STRAPI_API_URL: Buraya Render'dan aldığın Strapi linkini (örn: https://kolej-backend.onrender.com) yazmalısın.
+
+Deploy'a bas. 2 dakika içinde sana kolej-projesi.vercel.app gibi bir link verecek.
+
+4. Klasik Hosting ve Alan Adı (Domain) Meselesi
+Alan Adı: Eğer kolej.com gibi profesyonel bir alan adın varsa, bunu hem Vercel'e hem de Render'a kolayca bağlayabilirsin. (Vercel ayarlarından "Domain" kısmına girip eklemen yeterli).
+
+Klasik Hosting: Eğer "Ben mutlaka klasik bir hosting paketine (CPanel) kurmak istiyorum" dersen, bu projeyi orada çalıştırmak için "Node.js Selector" özelliği olan pahalı paketler alman ve çok karmaşık terminal ayarları yapman gerekir. Kesinlikle önermem.
+
+5. Profesyonel Ücretli Seçenek (DigitalOcean - Droplet)
+Eğer "Ben tek bir sunucum olsun, her şeyi içine kurayım, profesyonel olsun" dersen:
+
+DigitalOcean'dan ayda 4-6 dolara bir "Droplet" (Sanal Sunucu/VPS) kiralarsın.
+
+İçine Docker veya PM2 kurarak hem Strapi'yi hem Next.js'i aynı kutuda çalıştırabilirsin. Bu en performanslı ama en zor yöntemdir (Linux bilgisi gerektirir).
+
+Özetle Ne Yapmalısın?
+Kodlarını GitHub'a at.
+
+Strapi'yi Render'a kur (Ücretsiz).
+
+Next.js'i Vercel'e kur (Ücretsiz).
+
+Vercel'deki NEXT_PUBLIC_STRAPI_API_URL değişkenine Render linkini ver.
+
+Dikkat Edilecek Nokta: Render'ın ücretsiz paketinde sunucu "uyku moduna" geçer. Biri siteye girdiğinde Strapi'nin uyanması 30-40 saniye sürebilir. Bu sadece ücretsiz paketlerde olan bir durumdur.
+
+Bu süreçte herhangi bir adımda (örneğin Render ayarları veya Veritabanı bağlantısı) takılırsan hemen sorabilirsin, adım adım konfigürasyonunu yaparız.

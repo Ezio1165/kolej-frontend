@@ -1,0 +1,51 @@
+import { Lexend } from "next/font/google"; 
+const lexend = Lexend({ subsets: ["latin"], variable: "--font-lexend" });
+
+Font denemeleri yapmak istiyorsan şu **3 adımı** izlemelisin:
+
+**Adım 1:** Google'dan istediğin fontu import et. (Örneğin: `Poppins`, `Inter`, `Roboto`, `Montserrat`, `Playfair_Display`)
+**Adım 2:** Fontu tanımla.
+**Adım 3:** Body etiketindeki değişkeni değiştir.
+
+Örneğin, projeyi baştan sona **"Poppins"** fontu ile denemek istersen `layout.tsx` dosyanın ilgili kısımlarını şöyle değiştirmelisin:
+
+```tsx
+// 1. Yeni Fontu import et (Lexend yerine Poppins yazıyoruz)
+import { Poppins } from "next/font/google"; 
+
+// 2. Fontun ayarlarını yap (Bazı fontlar "weight" zorunlu kılar, örneğin Poppins)
+const poppins = Poppins({ 
+  weight: ["300", "400", "500", "600", "700", "800", "900"], 
+  subsets: ["latin"], 
+  variable: "--font-poppins" 
+});
+
+// ... aradaki diğer kodlar ...
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // ... aradaki veri çekme kodları ...
+
+  return (
+    <html lang="en">
+      {/* 3. Body etiketine yeni font değişkenini ver */}
+      <body className={`${poppins.variable} font-sans flex flex-col min-h-screen bg-[#f6f6f8] text-[#0d121b]`}>
+          <LayoutWrapper navbarProps={navbarProps} footerProps={footerProps}>
+            {children}
+          </LayoutWrapper>
+      </body>
+    </html>
+  );
+}
+
+**💡 Hızlı Deneme İpucu:** Eğer Tailwind konfigürasyonunda (`tailwind.config.ts`) eski `--font-lexend` adı kalmışsa ve font değişmezse, uğraşmamak için kodda fontu değiştirip **değişken adını aynı bırakabilirsin.** (Bu bir nevi hack yöntemidir ama denemeler yaparken aşırı hız kazandırır). 
+
+Örnek hızlı test:
+```tsx
+import { Montserrat } from "next/font/google"; 
+// Değişken adını bilerek lexend bıraktık ki Tailwind algılasın!
+const testFont = Montserrat({ subsets: ["latin"], variable: "--font-lexend" }); 
+
+// Body kısmına da:
+<body className={`${testFont.variable} font-sans ...`}>
+
+İstediğin Google Fontunu bu şekilde projeye anında dahil edip tüm sitedeki değişimi görebilirsin! Başka bir bölümle devam etmek ister misin?
