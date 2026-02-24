@@ -1,44 +1,56 @@
-// Strapi API'den veri çeken yardımcı fonksiyon
+/**
+ * getStrapiURL: Strapi API adresini belirler.
+ * Vercel'de NEXT_PUBLIC_STRAPI_API_URL değişkenini arar, 
+ * bulamazsa yerel adrese (localhost) döner.
+ */
+export function getStrapiURL(path = "") {
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://127.0.0.1:1337";
+    // Linkin sonunda eğik çizgi varsa temizler ve path ile birleştirir
+    return `${baseUrl.replace(/\/$/, "")}${path}`;
+}
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://127.0.0.1:1337';
-
-export async function getStrapiData(url: string) {
-    // URL'in başına /api ekleyelim (eğer yoksa)
-    const endpoint = url.startsWith('/api') ? url : `/api${url}`;
-
+/**
+ * getStrapiData: Strapi'den JSON verisi çeken ana fonksiyon.
+ */
+export async function getStrapiData(path: string) {
     try {
-        // Cache: 'no-store' diyerek her yenilemede taze veri çekmesini sağlıyoruz (Dev modu için)
-        const res = await fetch(`${STRAPI_URL}${endpoint}`, {
+        const baseUrl = getStrapiURL();
+        const url = new URL(path, baseUrl);
+
+        // Vercel build hatalarını önlemek için fetch parametreleri optimize edildi
+        const response = await fetch(url.href, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
+            // Verinin her seferinde taze gelmesi için cache: 'no-store'
             cache: 'no-store',
         });
 
-        if (!res.ok) {
-            throw new Error(`Veri çekilemedi: ${res.statusText}`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Strapi Hatası (${response.status}):`, errorText);
+            throw new Error(`Strapi verisi çekilemedi. Durum: ${response.status}`);
         }
 
-        const data = await res.json();
-        return data;
+        return await response.json();
     } catch (error) {
-        console.error('Strapi Hatası:', error);
+        console.error("Strapi Bağlantı Hatası:", error);
         return null;
     }
 }
 
-// Resim URL'lerini tam adrese çeviren yardımcı fonksiyon
+/**
+ * getStrapiMedia: Medya (Resim/Video) URL'lerini düzenler.
+ */
 export function getStrapiMedia(url: string | null | undefined) {
-    if (url == null) {
-        return null;
-    }
+    if (!url) return null;
 
-    // Eğer url zaten http ile başlıyorsa (Cloudinary vb.) dokunma
-    if (url.startsWith('http') || url.startsWith('//')) {
+    // Eğer URL zaten tam bir adres (http/https) ise olduğu gibi döner
+    if (url.startsWith("http") || url.startsWith("//")) {
         return url;
     }
 
-    // Değilse başına localhost:1337 ekle
-    return `${STRAPI_URL}${url}`;
+    // Değilse Strapi ana adresini başına ekler
+    return `${getStrapiURL()}${url}`;
 }
