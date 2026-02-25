@@ -26,7 +26,7 @@ export default function StatsBlock({ data }: StatsBlockProps) {
         // - Arka plan çok açık mavi (bg-[#eef6ff]) olarak ayarlandı.
         // - Asimetrik kesim uygulanmadı, baştan sona düz iniyor.
         // - Yükseklik (padding) py-16'dan py-8'e düşürülerek yarı yarıya kısaltıldı.
-        <section className="py-8 mt-10 mb-10 bg-[#eef6ff] text-gray-900 relative overflow-hidden rounded-[80px] md:rounded-[150px] border-y border-[#dbeafe]">
+        <section className="py-8 mt-15 mb-10 bg-[#eef6ff] text-gray-900 relative overflow-hidden rounded-[80px] md:rounded-[150px] border-y border-[#dbeafe]">
 
             {/* Arka plan deseni: Beyaz/Mavi zemin için çok hafif gri grid */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
