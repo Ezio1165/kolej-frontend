@@ -103,7 +103,7 @@ export default async function ArticleDetail({ params }: { params: Promise<{ slug
                         <span className="text-gray-500 text-sm font-medium">{dateStr}</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-6xl font-black text-[#0c4a6e] leading-tight mb-2">
+                    <h1 className="text-4xl md:text-6xl text-center font-black text-[#0c4a6e] leading-tight mb-2">
                         {article.title}
                     </h1>
                 </div>

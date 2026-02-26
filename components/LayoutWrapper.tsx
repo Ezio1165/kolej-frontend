@@ -13,9 +13,10 @@ interface LayoutWrapperProps {
         menuMap: Record<string, any[]>;
     };
     footerProps: {
+        logoUrl?: string | null; // EKLENDİ
         siteName: string;
-        description: string;
-        footerText: string;
+        description?: string;
+        footerText?: string;
     };
 }
 

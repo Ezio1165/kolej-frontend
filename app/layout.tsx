@@ -37,6 +37,7 @@ export default async function RootLayout({
 
   const navbarProps = { logoUrl, siteName: siteName || "College Project", menuMap };
   const footerProps = {
+    logoUrl, // Logoyu Footer'a gönderiyoruz
     siteName: siteName || "College Project",
     description: defaultSeo?.metaDescription,
     footerText
@@ -47,7 +48,8 @@ export default async function RootLayout({
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
-      <body className={`${lexend.variable} font-sans flex flex-col min-h-screen bg-[#f6f6f8] text-[#0d121b]`}>
+      {/* TASARIM DEĞİŞİKLİĞİ: Arka plan #2aa0f5 yapıldı, metinler beyaz (text-white) olarak ayarlandı */}
+      <body className={`${lexend.variable} font-sans flex flex-col min-h-screen bg-[#2aa0f5] text-white`}>
         <LayoutWrapper navbarProps={navbarProps} footerProps={footerProps}>
           {children}
         </LayoutWrapper>

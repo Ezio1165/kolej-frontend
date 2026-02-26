@@ -116,7 +116,7 @@ export default function LoginPage() {
 
                 {/* BAŞLIK: Açık temaya uygun koyu renk */}
                 <h1 className="text-6xl md:text-8xl font-black text-gray-900 mb-16 tracking-tighter text-center drop-shadow-sm">
-                    Who Are You?
+                    Log in as
                 </h1>
 
                 {/* Kartlar Grid'i */}

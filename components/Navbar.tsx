@@ -64,12 +64,7 @@ export default function Navbar({ logoUrl, siteName, menuMap }: NavbarProps) {
                     {/* LOGO */}
                     <Link href="/" className="flex items-center gap-4 cursor-pointer group z-50">
                         {logoUrl ? (
-                            /* KİLİT NOKTA 2: Logo Sınırları Kaldırıldı
-                               width ve height değerleri çok yüksek tutularak kalite korundu.
-                               Asıl boyutu class içindeki "h-..." komutları belirliyor.
-                               - isSolid (Aşağı kaydırıldığında): h-10 (Şuanki en küçük hali)
-                               - Sayfa en üstteyken: md:h-20 (Tam %100 daha büyük, maks ölçek)
-                            */
+
                             <Image
                                 src={logoUrl}
                                 alt={siteName}
@@ -98,17 +93,7 @@ export default function Navbar({ logoUrl, siteName, menuMap }: NavbarProps) {
                     <div className="hidden lg:flex items-center gap-5 ml-auto h-full">
                         {navStructure.map((item) => (
                             <div key={item.title} className="flex items-center h-full">
-                                {item.title === "Admissions" && (
-                                    <Link
-                                        href="/login"
-                                        className={`flex items-center gap-2 px-3 py-1 mr-2 rounded-full border transition-all text-[11px] font-bold uppercase tracking-widest ${loginBtnClasses}`}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                                            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
-                                        </svg>
-                                        Login
-                                    </Link>
-                                )}
+
 
                                 <div
                                     className="relative h-full flex items-center"
@@ -124,6 +109,17 @@ export default function Navbar({ logoUrl, siteName, menuMap }: NavbarProps) {
                                         <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${isSolid ? "bg-blue-600" : "bg-white"}`}></span>
                                     </Link>
                                 </div>
+                                {item.title === "Admissions" && (
+                                    <Link
+                                        href="/login"
+                                        className={`flex items-center gap-2 px-3 py-1 mr-2 rounded-full border transition-all text-[11px] font-bold uppercase tracking-widest ${loginBtnClasses}`}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                            <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                                        </svg>
+                                        Login
+                                    </Link>
+                                )}
                             </div>
                         ))}
                     </div>

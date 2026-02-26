@@ -157,7 +157,7 @@ export default function OurValues({ data }: OurValuesProps) {
                         </button>
                         <button
                             ref={(node) => setNextEl(node)}
-                            className="w-12 h-12 rounded-full bg-blue-700 text-white flex items-center justify-center hover:bg-blue-800 transition-all shadow-lg shadow-blue-200/50 focus:outline-none active:scale-95"
+                            className="w-12 h-12 rounded-full border-2 border-blue-200 bg-white flex items-center justify-center text-blue-700 hover:bg-blue-50 hover:border-blue-300 transition-all shadow-sm focus:outline-none active:scale-95"
                             aria-label="Next"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
