@@ -4,6 +4,9 @@ import React from "react";
 import Image from "next/image";
 import { getStrapiMedia } from "@/lib/strapi";
 import { SlidingLogoMarquee } from "./SlidingLogoMarquee";
+import { Bitter } from "next/font/google";
+
+const bitter = Bitter({ subsets: ["latin"] });
 
 interface ProductMarqueeProps {
     data: {
@@ -67,7 +70,7 @@ export default function ProductMarquee({ data }: ProductMarqueeProps) {
                 {/* Bölüm Başlığı */}
                 {data.title && (
                     <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-20 mb-12 text-left">
-                        <h2 className="text-3xl md:text-4xl font-black text-[#0c4a6e] tracking-tight uppercase">
+                        <h2 className={`text-3xl md:text-4xl ${bitter.className} font-black text-[#0c4a6e] tracking-wide uppercase`}>
                             {data.title}
                         </h2>
                         <div className="w-16 h-1.5 bg-blue-600 mt-4 rounded-full"></div>

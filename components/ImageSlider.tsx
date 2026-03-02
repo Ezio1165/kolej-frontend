@@ -11,6 +11,9 @@ import { getStrapiMedia } from "@/lib/strapi";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Bitter } from "next/font/google";
+
+const bitter = Bitter({ subsets: ["latin"] });
 
 interface SliderCard {
     id: number;
@@ -40,7 +43,7 @@ export default function ImageSlider({ data }: ImageSliderProps) {
 
                 {/* Bölüm Başlığı (Eğer Strapi'den gelmezse diye varsayılan bir metin eklendi) */}
                 <div className="mb-14 text-left relative z-30">
-                    <h2 className="text-4xl md:text-5xl font-black text-[#0c4a6e] tracking-tight drop-shadow-sm">
+                    <h2 className={`text-4xl md:text-5xl ${bitter.className} font-black text-[#0c4a6e] tracking-wide drop-shadow-sm`}>
                         {data.title || "Where would you like to explore?"}
                     </h2>
                     <div className="w-24 h-1.5 bg-blue-600 mt-4 rounded-full"></div>
@@ -89,10 +92,6 @@ export default function ImageSlider({ data }: ImageSliderProps) {
                                             src={imgUrl}
                                             alt={card.title || "Explore image"}
                                             fill
-                                            /* MAT VE SİYAH-BEYAZ EFEKTİ 
-                                               'grayscale opacity-35' -> Resmi siyah beyaz yapar ve soluklaştırarak süt gibi mat bir görüntü verir.
-                                               'group-hover:grayscale-0 group-hover:opacity-100' -> Üzerine gelince orijinal canlı renklere döner. 
-                                            */
                                             className="object-cover grayscale opacity-35 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"
                                         />
                                     ) : (

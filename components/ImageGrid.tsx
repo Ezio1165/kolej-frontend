@@ -4,6 +4,9 @@ import React from "react";
 import Image from "next/image";
 import { getStrapiMedia } from "@/lib/strapi";
 import { SlidingLogoMarquee } from "./SlidingLogoMarquee";
+import { Bitter } from "next/font/google";
+
+const bitter = Bitter({ subsets: ["latin"] });
 
 interface ImageGridProps {
     data: {
@@ -64,7 +67,7 @@ export default function ImageGrid({ data }: ImageGridProps) {
                 Eskiden "text-base md:text-lg" olan sınıf, %70 civarı artış için 
                 "text-2xl md:text-4xl" olarak güncellendi.
             */}
-                        <h2 className="text-2xl md:text-4xl font-black text-[#0c4a6e] tracking-tight uppercase opacity-90">
+                        <h2 className={`text-2xl md:text-4xl ${bitter.className} font-black text-[#0c4a6e] tracking-wider opacity-90`}>
                             {data.title}
                         </h2>
                         <div className="w-8 h-1 bg-blue-500 mt-1.5 rounded-full"></div>

@@ -2,6 +2,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getStrapiData, getStrapiMedia } from "@/lib/strapi";
+import { Bitter } from "next/font/google";
+
+const bitter = Bitter({ subsets: ["latin"] });
 
 // Belirli bir kategorideki en son yayını çeken yardımcı fonksiyon
 async function getLatestByCategory(category: string) {
@@ -47,7 +50,7 @@ export default async function NewsFeed({ data }: { data: { title?: string } }) {
                 {/* Bölüm Başlığı */}
                 {data.title && (
                     <div className="mb-10 text-left">
-                        <h2 className="text-3xl md:text-4xl font-black text-[#0c4a6e] tracking-tight uppercase">
+                        <h2 className={`text-3xl md:text-4xl ${bitter.className} font-black text-[#0c4a6e] tracking-wide uppercase`}>
                             {data.title}
                         </h2>
                         <div className="w-16 h-1.5 bg-blue-600 mt-3 rounded-full"></div>
@@ -85,14 +88,7 @@ export default async function NewsFeed({ data }: { data: { title?: string } }) {
                                 key={item.id}
                                 className="group flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
                             >
-                                {/* ========================================================================
-                  KİLİT NOKTA 3: KART FOTOĞRAFININ ÖLÇÜSÜ (ASPECT RATIO)
-                  ========================================================================
-                  Eskiden burada `aspect-[4/5]` vardı ve resmi çok uzun (dikey) yapıyordu.
-                  Bunu `aspect-video` (16:9 formatı) olarak değiştirdim. 
-                  - Eğer fotoğraf alanını daha da KISALTMAK istersen: `h-40` veya `h-48` yazabilirsin.
-                  - Biraz daha uzun kare istersen: `aspect-[4/3]` yazabilirsin.
-                */}
+
                                 <Link href={`/news/${art.slug}`} className="block relative aspect-video w-full overflow-hidden bg-gray-50 border-b border-gray-100">
                                     {imgUrl ? (
                                         <Image

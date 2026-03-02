@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getStrapiMedia } from "@/lib/strapi";
+import { Bitter } from "next/font/google";
+
+const bitter = Bitter({ subsets: ["latin"] });
 
 interface VideoCardItem {
     id: number;
@@ -38,7 +41,7 @@ export default function VideoCardsBlock({ data }: VideoCardsBlockProps) {
                 {/* Başlık Bölümü */}
                 {data.sectionTitle && (
                     <div className="mb-16 text-left">
-                        <h2 className="text-4xl md:text-5xl font-black text-[#0c4a6e] tracking-tight leading-tight">
+                        <h2 className={`text-4xl md:text-5xl ${bitter.className} font-black text-[#0c4a6e] tracking-wide leading-tight`}>
                             {data.sectionTitle}
                         </h2>
                         <div className="w-20 h-1.5 bg-blue-600 mt-6 rounded-full"></div>

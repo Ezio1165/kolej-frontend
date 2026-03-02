@@ -3,6 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Bitter } from "next/font/google";
+
+const bitter = Bitter({ subsets: ["latin"] });
 
 // Swiper Stilleri
 import "swiper/css";
@@ -78,7 +81,7 @@ export default function OurValues({ data }: OurValuesProps) {
 
                 {/* Başlık Bölümü (Büyütülmüş ve etiketsiz hali korundu) */}
                 <div className="mb-8 text-left">
-                    <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
+                    <h2 className={`text-4xl md:text-5xl ${bitter.className} font-black text-[#0c4a6e] tracking-wide`}>
                         {data.title || "Our Values"}
                     </h2>
                     <div className="w-16 h-1.5 bg-blue-600 mt-4 rounded-full"></div>
@@ -115,14 +118,14 @@ export default function OurValues({ data }: OurValuesProps) {
                                 <SwiperSlide key={item.id || idx} className="flex justify-center h-auto">
                                     <div
                                         className={`
-                      w-full h-[320px] p-8 rounded-[2.5rem] border
-                      ${theme.bg} ${theme.borderColor}
-                      flex flex-col justify-start
-                      transition-all duration-500 ease-out
-                      hover:-translate-y-2 hover:shadow-2xl ${theme.hoverShadow}
-                      cursor-default relative
-                      overflow-hidden
-                    `}
+                          w-full h-[320px] p-8 rounded-[2.5rem] border
+                          ${theme.bg} ${theme.borderColor}
+                          flex flex-col justify-start
+                          transition-all duration-500 ease-out
+                          hover:-translate-y-2 hover:shadow-2xl ${theme.hoverShadow}
+                          cursor-default relative
+                          overflow-hidden
+                        `}
                                     >
                                         {/* Başlık */}
                                         <h3 className={`text-2xl font-extrabold mb-4 tracking-tight ${theme.titleColor}`}>
