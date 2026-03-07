@@ -3,15 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import { Bitter } from "next/font/google";
-
-const bitter = Bitter({ subsets: ["latin"] });
 
 // Swiper Stilleri
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { Bitter } from "next/font/google";
 
+const bitter = Bitter({ subsets: ["latin"] });
 interface ValueItem {
     id: number;
     title: string;
@@ -25,44 +24,45 @@ interface OurValuesProps {
     };
 }
 
-/** * Metin dosyasından alınan yeni pastel tema renkleri:
- * Rose, Teal, Indigo, Amber, Sky
+/** * YENİ CANLI TEMA RENKLERİ:
+ * Arka planlar belirgin -600 tonlarına çekildi.
+ * Metinler mükemmel okunabilirlik için beyaz ve çok açık tonlara (100) ayarlandı.
  */
 const VALUE_CARD_THEMES = [
     {
-        bg: "bg-rose-50",
-        titleColor: "text-rose-700",
-        textColor: "text-rose-900",
-        borderColor: "border-rose-100",
-        hoverShadow: "hover:shadow-rose-200/50"
+        bg: "bg-fuchsia-600",
+        titleColor: "text-white",
+        textColor: "text-fuchsia-100",
+        borderColor: "border-fuchsia-500",
+        hoverShadow: "hover:shadow-fuchsia-600/60"
     },
     {
-        bg: "bg-teal-50",
-        titleColor: "text-teal-700",
-        textColor: "text-teal-900",
-        borderColor: "border-teal-100",
-        hoverShadow: "hover:shadow-teal-200/50"
+        bg: "bg-teal-600",
+        titleColor: "text-white",
+        textColor: "text-teal-100",
+        borderColor: "border-teal-500",
+        hoverShadow: "hover:shadow-teal-600/60"
     },
     {
-        bg: "bg-indigo-50",
-        titleColor: "text-indigo-700",
-        textColor: "text-indigo-900",
-        borderColor: "border-indigo-100",
-        hoverShadow: "hover:shadow-indigo-200/50"
+        bg: "bg-indigo-600",
+        titleColor: "text-white",
+        textColor: "text-indigo-100",
+        borderColor: "border-indigo-500",
+        hoverShadow: "hover:shadow-indigo-600/60"
     },
     {
-        bg: "bg-amber-50",
-        titleColor: "text-amber-700",
-        textColor: "text-amber-900",
-        borderColor: "border-amber-100",
-        hoverShadow: "hover:shadow-amber-200/50"
+        bg: "bg-amber-600",
+        titleColor: "text-white",
+        textColor: "text-amber-100",
+        borderColor: "border-amber-500",
+        hoverShadow: "hover:shadow-amber-600/60"
     },
     {
-        bg: "bg-sky-50",
-        titleColor: "text-sky-700",
-        textColor: "text-sky-900",
-        borderColor: "border-sky-100",
-        hoverShadow: "hover:shadow-sky-200/50"
+        bg: "bg-sky-600",
+        titleColor: "text-white",
+        textColor: "text-sky-100",
+        borderColor: "border-sky-500",
+        hoverShadow: "hover:shadow-sky-600/60"
     }
 ];
 
@@ -79,7 +79,7 @@ export default function OurValues({ data }: OurValuesProps) {
 
             <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-20 relative z-10">
 
-                {/* Başlık Bölümü (Büyütülmüş ve etiketsiz hali korundu) */}
+                {/* Başlık Bölümü */}
                 <div className="mb-8 text-left">
                     <h2 className={`text-4xl md:text-5xl ${bitter.className} font-black text-[#0c4a6e] tracking-wide`}>
                         {data.title || "Our Values"}
@@ -111,36 +111,37 @@ export default function OurValues({ data }: OurValuesProps) {
                         className="pb-2"
                     >
                         {data.items.map((item, idx) => {
-                            // Gönderdiğin renklere göre temayı seçiyoruz
+                            // Canlı renklere göre temayı seçiyoruz
                             const theme = VALUE_CARD_THEMES[idx % VALUE_CARD_THEMES.length];
 
                             return (
                                 <SwiperSlide key={item.id || idx} className="flex justify-center h-auto">
                                     <div
                                         className={`
-                          w-full h-[320px] p-8 rounded-[2.5rem] border
-                          ${theme.bg} ${theme.borderColor}
-                          flex flex-col justify-start
-                          transition-all duration-500 ease-out
-                          hover:-translate-y-2 hover:shadow-2xl ${theme.hoverShadow}
-                          cursor-default relative
-                          overflow-hidden
-                        `}
+                      w-full h-[320px] p-8 rounded-[2.5rem] border
+                      ${theme.bg} ${theme.borderColor}
+                      flex flex-col justify-start
+                      transition-all duration-500 ease-out
+                      hover:-translate-y-2 hover:shadow-2xl ${theme.hoverShadow}
+                      cursor-default relative
+                      overflow-hidden
+                    `}
                                     >
                                         {/* Başlık */}
-                                        <h3 className={`text-2xl font-extrabold mb-4 tracking-tight ${theme.titleColor}`}>
+                                        <h3 className={`text-2xl ${bitter.className} font-extrabold mb-4 tracking-tight relative z-10 ${theme.titleColor}`}>
                                             {item.title}
                                         </h3>
 
                                         {/* Açıklama */}
-                                        <div className="overflow-y-auto pr-2 custom-scrollbar">
-                                            <p className={`text-base leading-relaxed font-semibold opacity-90 ${theme.textColor}`}>
+                                        <div className="overflow-y-auto pr-2  custom-scrollbar relative z-10">
+                                            <p className={`text-base ${bitter.className} leading-relaxed font-medium ${theme.textColor}`}>
                                                 {item.description}
                                             </p>
                                         </div>
 
-                                        {/* Dekoratif Hafif Gradyan */}
-                                        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-3xl pointer-events-none"></div>
+                                        {/* Dekoratif Işık Yansıması (Koyu zeminlerde harika durur) */}
+                                        <div className="absolute -top-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-3xl pointer-events-none"></div>
+                                        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-black/10 rounded-full blur-3xl pointer-events-none"></div>
                                     </div>
                                 </SwiperSlide>
                             );
@@ -171,6 +172,7 @@ export default function OurValues({ data }: OurValuesProps) {
                 </div>
             </div>
 
+            {/* KİLİT NOKTA: Kart zeminleri koyu olduğu için kaydırma çubuğu artık beyaz ağırlıklı olmalı */}
             <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
@@ -179,8 +181,11 @@ export default function OurValues({ data }: OurValuesProps) {
           background: transparent;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background-color: rgba(0,0,0,0.05);
+          background-color: rgba(255, 255, 255, 0.3);
           border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(255, 255, 255, 0.6);
         }
       `}</style>
         </section>
