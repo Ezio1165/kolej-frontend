@@ -22,11 +22,11 @@ export default async function RootLayout({
   // getStrapiData artık başına /api ekleyeceği için sadece "/global" yazmak yeterli
   const [globalData, menuData] = await Promise.all([
     getStrapiData("/global?populate=*"),
-    getStrapiData("/menu-sections?populate=*"),
+    getStrapiData("/menu-sections?populate[links][populate]=*"),
   ]);
 
   const { siteName, logo, footerText, defaultSeo } = globalData?.data || {};
-  const logoUrl = getStrapiMedia(logo?.url);
+  const logoUrl = getStrapiMedia(logo?.data?.attributes?.url || logo?.data?.url || logo?.url);
 
   const menuMap: Record<string, any[]> = {};
   if (menuData?.data) {
